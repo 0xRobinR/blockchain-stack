@@ -111,7 +111,7 @@ assert is_bit_set(value, 2) is False
 assert is_bit_set(value, 3) is True
 
 def set_bit(value: int, position: int) -> int:
-    return (value | (1 << position))
+    return value | (1 << position)
 
 assert set_bit(0b0000, 2) == 0b0100
 assert set_bit(0b0001, 2) == 0b0101

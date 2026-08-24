@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 
+	"github.com/0xrobinr/blockchain-stack/go/common"
 	"github.com/0xrobinr/blockchain-stack/go/cryptography"
 	"github.com/0xrobinr/blockchain-stack/go/merkleTree"
 )
@@ -44,4 +45,11 @@ func main() {
 	// testing merkle tree
 	elements := []string{"why", "is", "it", "required", "to", "be", "a", "list", "?"}
 	print(merkleTree.NewMerkleTree(elements).GetRoot())
+	print("\n")
+
+	// testing common utils
+	value := uint32(0x12345678)
+	bit_value := common.ExtractByte(value, 1)
+	print(bit_value)
+
 }

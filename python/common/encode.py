@@ -35,7 +35,7 @@ print(encode_from_maths(65535).hex() == "ffff")
 
 try:
     print(encode_from_maths(65536))
-except Exception as e:
+except ValueError as e:
     print("I knew it")
 
 
@@ -98,3 +98,28 @@ assert extract_byte(value, 0) == 0x78
 assert extract_byte(value, 1) == 0x56
 assert extract_byte(value, 2) == 0x34
 assert extract_byte(value, 3) == 0x12
+
+
+def is_bit_set(value: int, position: int) -> bool:
+    return (value & (1 << position)) > 0
+
+value = 0b1010
+
+assert is_bit_set(value, 0) is False
+assert is_bit_set(value, 1) is True
+assert is_bit_set(value, 2) is False
+assert is_bit_set(value, 3) is True
+
+def set_bit(value: int, position: int) -> int:
+    return (value | (1 << position))
+
+assert set_bit(0b0000, 2) == 0b0100
+assert set_bit(0b0001, 2) == 0b0101
+
+def pack_nibbles(high: int, low: int) -> int:
+    return (high << 4) | low
+
+
+assert pack_nibbles(0xA, 0x7) == 0xA7
+assert pack_nibbles(0x0, 0xF) == 0x0F
+assert pack_nibbles(0xF, 0xF) == 0xFF

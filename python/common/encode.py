@@ -139,3 +139,35 @@ assert encode_uint16_be(0x0100).hex() == "0100"
 assert encode_uint16_be(0x1234).hex() == "1234"
 assert encode_uint16_be(0xFFFF).hex() == "ffff"
 
+def encode_uint16_le(value: int) -> bytes:
+    assert (value >= 0 and value <= 0xFFFF)
+
+    high = value & 0xFF
+    low = value >> 8
+
+    return bytes([high, low])
+
+assert encode_uint16_le(0x1234).hex() == "3412"
+
+def decode_uint16_be(data: bytes) -> int:
+    assert len(data) == 2
+
+    high = data[0]
+    low = data[1]
+
+    return (high << 8) | low
+
+assert decode_uint16_be(bytes.fromhex("0000")) == 0
+assert decode_uint16_be(bytes.fromhex("0100")) == 256
+assert decode_uint16_be(bytes.fromhex("1234")) == 0x1234
+assert decode_uint16_be(bytes.fromhex("ffff")) == 65535
+
+def decode_uint16_le(data: bytes) -> int:
+    assert len(data) == 2
+
+    high = data[1]
+    low = data[0]
+
+    return (high << 8) | low
+
+assert decode_uint16_le(bytes.fromhex("3412")) == 0x1234

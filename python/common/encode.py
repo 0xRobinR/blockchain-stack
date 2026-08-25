@@ -123,3 +123,19 @@ def pack_nibbles(high: int, low: int) -> int:
 assert pack_nibbles(0xA, 0x7) == 0xA7
 assert pack_nibbles(0x0, 0xF) == 0x0F
 assert pack_nibbles(0xF, 0xF) == 0xFF
+
+def encode_uint16_be(value: int) -> bytes:
+    assert (value >= 0 and value <= 0xFFFF)
+
+    high = value >> 8
+    low = value & 0xFF
+
+    return bytes([high, low])
+
+assert encode_uint16_be(0x0000).hex() == "0000"
+assert encode_uint16_be(0x0001).hex() == "0001"
+assert encode_uint16_be(0x00FF).hex() == "00ff"
+assert encode_uint16_be(0x0100).hex() == "0100"
+assert encode_uint16_be(0x1234).hex() == "1234"
+assert encode_uint16_be(0xFFFF).hex() == "ffff"
+

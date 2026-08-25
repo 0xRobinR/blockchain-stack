@@ -1,4 +1,4 @@
-from merkle_tree.merkle_leaf import MerkleLeaf
+from .merkle_leaf import MerkleLeaf
 
 
 class MerkleTree:

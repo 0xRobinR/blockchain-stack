@@ -171,3 +171,13 @@ def decode_uint16_le(data: bytes) -> int:
     return (high << 8) | low
 
 assert decode_uint16_le(bytes.fromhex("3412")) == 0x1234
+
+for value in range(65536):
+    assert decode_uint16_be(
+        encode_uint16_be(value)
+    ) == value
+
+for value in range(65536):
+    assert decode_uint16_le(
+        encode_uint16_le(value)
+    ) == value

@@ -125,7 +125,7 @@ assert pack_nibbles(0x0, 0xF) == 0x0F
 assert pack_nibbles(0xF, 0xF) == 0xFF
 
 def encode_uint16_be(value: int) -> bytes:
-    assert (value >= 0 and value <= 0xFFFF)
+    assert value >= 0 and value <= 0xFFFF
 
     high = value >> 8
     low = value & 0xFF
@@ -140,7 +140,7 @@ assert encode_uint16_be(0x1234).hex() == "1234"
 assert encode_uint16_be(0xFFFF).hex() == "ffff"
 
 def encode_uint16_le(value: int) -> bytes:
-    assert (value >= 0 and value <= 0xFFFF)
+    assert value >= 0 and value <= 0xFFFF
 
     high = value & 0xFF
     low = value >> 8

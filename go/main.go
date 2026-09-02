@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"os"
 
@@ -51,5 +52,17 @@ func main() {
 	value := uint32(0x12345678)
 	bit_value := common.ExtractByte(value, 1)
 	print(bit_value)
+
+	var zero [32]byte
+
+	h1 := common.NextHash(zero, []byte("A"))
+	h2 := common.NextHash(h1, []byte("B"))
+	h3 := common.NextHash(h2, []byte("C"))
+
+	fmt.Println("-----------")
+
+	fmt.Printf("%x\n", h1)
+	fmt.Printf("%x\n", h2)
+	fmt.Printf("%x\n", h3)
 
 }

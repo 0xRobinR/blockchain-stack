@@ -1,4 +1,4 @@
-
+import hashlib
 # test how encoding works
 
 print(len("₹"))
@@ -181,3 +181,69 @@ for value in range(65536):
     assert decode_uint16_le(
         encode_uint16_le(value)
     ) == value
+
+message = b"hell-o"
+
+digest = hashlib.sha256(message).digest()
+
+print(digest)
+print(len(digest))
+print(digest.hex())
+print(len(digest.hex()))
+
+a = b"ff"
+b = bytes.fromhex("ff")
+
+print(a.hex())
+print(b.hex())
+
+print(hashlib.sha256(a).hexdigest())
+print(hashlib.sha256(b).hexdigest())
+
+def hash_bytes(data: bytes) -> bytes:
+    assert isinstance(data, bytes)
+    return hashlib.sha256(data).digest()
+
+assert isinstance(hash_bytes(b""), bytes)
+assert len(hash_bytes(b"")) == 32
+assert len(hash_bytes(b"hello")) == 32
+assert hash_bytes(b"hello") == hash_bytes(b"hello")
+assert hash_bytes(b"hello") != hash_bytes(b"Hello")
+
+def hash_uint16(value: int) -> bytes:
+    b = encode_uint16_be(value)
+    return hash_bytes(b)
+
+# simple chain of blocks
+
+b1 = b"block 1"
+h1 = hash_bytes(b1)
+
+b2 = b"block 2" + b1
+h2 = hash_bytes(b2)
+
+b3 = b"block 3" + b2
+h3 = hash_bytes(b3)
+
+def next_hash(previous_hash: bytes, payload: bytes) -> bytes:
+    assert len(previous_hash) == 32
+    return hash_bytes(previous_hash + hash_bytes(payload))
+
+zero = bytes(32)
+
+h1 = next_hash(zero, b"A")
+h2 = next_hash(h1, b"B")
+h3 = next_hash(h2, b"C")
+
+print("\n-----------\n")
+
+print(h1.hex())
+print(h2.hex())
+print(h3.hex())
+
+assert len(h1) == 32
+assert len(h2) == 32
+assert len(h3) == 32
+
+assert h1 != h2
+assert h2 != h3

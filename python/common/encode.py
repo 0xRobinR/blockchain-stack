@@ -1,15 +1,15 @@
 import hashlib
 # test how encoding works
 
-print(len("₹"))
+# print(len("₹"))
 
-print(len("₹".encode("utf-8")))
+# print(len("₹".encode("utf-8")))
 
 x = 256
 
-print(x.to_bytes(2, "big").hex())
+# print(x.to_bytes(2, "big").hex())
 
-print(x.to_bytes(2, "little").hex())
+# print(x.to_bytes(2, "little").hex())
 
 def test_encode(value: int) -> bytes:
     return value.to_bytes(2, "big")
@@ -19,7 +19,7 @@ def encode_from_maths(value: int) -> bytes:
     high = value // 256
     low = value % 256
 
-    print(high, low)
+    # print(high, low)
 
     return bytes([high, low])
 
@@ -27,16 +27,16 @@ def test_decode(data: bytes) -> int:
     assert len(data) == 2
     return int.from_bytes(data, "big")
 
-print(encode_from_maths(0).hex() == "0000")
-print(encode_from_maths(1).hex() == "0001")
-print(encode_from_maths(10).hex())
-print(encode_from_maths(256).hex() == "0100")
-print(encode_from_maths(65535).hex() == "ffff")
+# print(encode_from_maths(0).hex() == "0000")
+# print(encode_from_maths(1).hex() == "0001")
+# print(encode_from_maths(10).hex())
+# print(encode_from_maths(256).hex() == "0100")
+# print(encode_from_maths(65535).hex() == "ffff")
 
-try:
-    print(encode_from_maths(65536))
-except ValueError as e:
-    print("I knew it")
+# try:
+#     print(encode_from_maths(65536))
+# except ValueError as e:
+#     print("I knew it")
 
 
 assert test_decode(bytes.fromhex("0000")) == 0
@@ -124,6 +124,10 @@ assert pack_nibbles(0xA, 0x7) == 0xA7
 assert pack_nibbles(0x0, 0xF) == 0x0F
 assert pack_nibbles(0xF, 0xF) == 0xFF
 
+def encode_uint8(value: int) -> bytes:
+    assert 0 <= value <= 0xFF
+    return bytes([value])
+
 def encode_uint16_be(value: int) -> bytes:
     assert 0 <= value <= 0xFFFF
 
@@ -186,19 +190,19 @@ message = b"hell-o"
 
 digest = hashlib.sha256(message).digest()
 
-print(digest)
-print(len(digest))
-print(digest.hex())
-print(len(digest.hex()))
+# print(digest)
+# print(len(digest))
+# print(digest.hex())
+# print(len(digest.hex()))
 
 a = b"ff"
 b = bytes.fromhex("ff")
 
-print(a.hex())
-print(b.hex())
+# print(a.hex())
+# print(b.hex())
 
-print(hashlib.sha256(a).hexdigest())
-print(hashlib.sha256(b).hexdigest())
+# print(hashlib.sha256(a).hexdigest())
+# print(hashlib.sha256(b).hexdigest())
 
 def hash_bytes(data: bytes) -> bytes:
     assert isinstance(data, bytes)
@@ -235,11 +239,11 @@ h1 = next_hash(zero, b"A")
 h2 = next_hash(h1, b"B")
 h3 = next_hash(h2, b"C")
 
-print("\n-----------\n")
+# print("\n-----------\n")
 
-print(h1.hex())
-print(h2.hex())
-print(h3.hex())
+# print(h1.hex())
+# print(h2.hex())
+# print(h3.hex())
 
 assert len(h1) == 32
 assert len(h2) == 32

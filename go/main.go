@@ -65,4 +65,19 @@ func main() {
 	fmt.Printf("%x\n", h2)
 	fmt.Printf("%x\n", h3)
 
+	tx := common.Transaction{
+		Version: 1,
+		FromAdr: 42,
+		ToAdr:   91,
+		Amount:  500,
+		Nonce:   7,
+	}
+
+	serialized_tx := common.SerializeTx(tx)
+
+	fmt.Printf("%x\n", serialized_tx)
+
+	hash_tx := common.HashBytes(serialized_tx)
+	fmt.Printf("%x\n", hash_tx)
+
 }

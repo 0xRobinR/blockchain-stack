@@ -51,7 +51,7 @@ def deserialize_txn(data: bytes) -> Transaction:
 decoded_tx = deserialize_txn(serialized_tx)
 assert decoded_tx == tx
 
-def txn_hash(serialized_tx: bytes) -> bytes:
+def txn_hash(serialized_tx: bytes) -> str:
     return hash_bytes(serialized_tx).hex()
 
 print(txn_hash(serialized_tx))

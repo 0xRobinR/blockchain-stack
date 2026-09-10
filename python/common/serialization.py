@@ -55,3 +55,10 @@ def txn_hash(serialized_tx: bytes) -> str:
     return hash_bytes(serialized_tx).hex()
 
 print(txn_hash(serialized_tx))
+
+original_tx = serialized_tx
+
+corrupted = bytearray(original_tx)
+corrupted[6] ^= 0x05
+print(txn_hash(bytes(corrupted)))
+print(deserialize_txn(bytes(corrupted)))

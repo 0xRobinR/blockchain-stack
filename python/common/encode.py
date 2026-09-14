@@ -1,15 +1,6 @@
 import hashlib
-# test how encoding works
-
-# print(len("₹"))
-
-# print(len("₹".encode("utf-8")))
 
 x = 256
-
-# print(x.to_bytes(2, "big").hex())
-
-# print(x.to_bytes(2, "little").hex())
 
 def test_encode(value: int) -> bytes:
     return value.to_bytes(2, "big")
@@ -27,29 +18,11 @@ def test_decode(data: bytes) -> int:
     assert len(data) == 2
     return int.from_bytes(data, "big")
 
-# print(encode_from_maths(0).hex() == "0000")
-# print(encode_from_maths(1).hex() == "0001")
-# print(encode_from_maths(10).hex())
-# print(encode_from_maths(256).hex() == "0100")
-# print(encode_from_maths(65535).hex() == "ffff")
-
-# try:
-#     print(encode_from_maths(65536))
-# except ValueError as e:
-#     print("I knew it")
-
-
 assert test_decode(bytes.fromhex("0000")) == 0
 assert test_decode(bytes.fromhex("0001")) == 1
 assert test_decode(bytes.fromhex("00ff")) == 255
 assert test_decode(bytes.fromhex("0100")) == 256
 assert test_decode(bytes.fromhex("ffff")) == 65535
-
-# print(test_decode(bytes.fromhex("010000")))
-
-# print(test_decode(b""))
-# print(test_decode(b"\x01"))
-# print(test_decode(b"\x01\x02\x03"))
 
 def encode_uint16_manual(value: int) -> bytes:
     if value < 0 or value > 0xFFFF:
@@ -190,19 +163,8 @@ message = b"hell-o"
 
 digest = hashlib.sha256(message).digest()
 
-# print(digest)
-# print(len(digest))
-# print(digest.hex())
-# print(len(digest.hex()))
-
 a = b"ff"
 b = bytes.fromhex("ff")
-
-# print(a.hex())
-# print(b.hex())
-
-# print(hashlib.sha256(a).hexdigest())
-# print(hashlib.sha256(b).hexdigest())
 
 def hash_bytes(data: bytes) -> bytes:
     assert isinstance(data, bytes)
@@ -238,12 +200,6 @@ zero = bytes(32)
 h1 = next_hash(zero, b"A")
 h2 = next_hash(h1, b"B")
 h3 = next_hash(h2, b"C")
-
-# print("\n-----------\n")
-
-# print(h1.hex())
-# print(h2.hex())
-# print(h3.hex())
 
 assert len(h1) == 32
 assert len(h2) == 32

@@ -18,15 +18,8 @@ def xor_op(a: int, b: int) -> int:
 
 a = 223
 b = 110
-
-# print(and_op(a, b))
-# print(or_op(a, b))
-# print(left_shift(a))
-# print(right_shift(a))
-
-# xor_op(a, b)
-
 value = 0xABCD
+
 print(value >> 8)
 print(value & 0xFF)
 print(value >> 4)

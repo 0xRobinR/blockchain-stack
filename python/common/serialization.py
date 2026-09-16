@@ -62,3 +62,30 @@ corrupted = bytearray(original_tx)
 corrupted[6] ^= 0x05
 print(txn_hash(bytes(corrupted)))
 print(deserialize_txn(bytes(corrupted)))
+
+def signing_digest(txn: Transaction) -> bytes:
+    serialized_txn = serialize_txn(txn)
+    return hash_bytes(serialized_txn)
+
+tx1 = Transaction(
+    version=1,
+    from_adr=42,
+    to_adr=91,
+    amount=500,
+    nonce=7,
+)
+
+tx2 = Transaction(
+    version=1,
+    from_adr=42,
+    to_adr=91,
+    amount=501,
+    nonce=7,
+)
+
+print(signing_digest(tx1))
+assert len(signing_digest(tx1)) == 32
+
+assert signing_digest(tx1) == signing_digest(tx1)
+
+assert signing_digest(tx1) != signing_digest(tx2)

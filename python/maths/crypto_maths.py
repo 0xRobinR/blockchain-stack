@@ -65,3 +65,44 @@ print("rbase:", base % modulus)
 
 x = bsgs(base, target, modulus)
 print("inverse_x:", x)
+
+# rsa lowkey
+p = 11
+q = 13
+
+n = p * q
+phi = (p - 1) * (q - 1)
+
+e = 19
+
+d = pow(e, -1, phi)
+print("d:", d)
+
+msg = 93
+
+enc = pow(msg, e, n)
+print("enc:", enc)
+
+dec = pow(enc, d, n)
+print("dec:", dec)
+
+# diffie-hellman lowkey
+pub_p = 23
+pub_g = 7
+
+a_sec = 19
+b_sec = 29
+
+a_pub = pow(pub_g, a_sec, pub_p)
+b_pub = pow(pub_g, b_sec, pub_p)
+
+print("a_pub:", a_pub)
+print("b_pub:", b_pub)
+
+a_shared = pow(b_pub, a_sec, pub_p)
+b_shared = pow(a_pub, b_sec, pub_p)
+
+print("a_shared:", a_shared)
+print("b_shared:", b_shared)
+
+assert(a_shared == b_shared)

@@ -108,6 +108,35 @@ print("b_shared:", b_shared)
 
 assert(a_shared == b_shared)
 
+# manual mod ops
+def mod_add(a: int, b: int, p: int) -> int:
+    return (a + b) % p
+
+def mod_sub(a: int, b: int, p: int) -> int:
+    return (a - b) % p
+
+def mod_mul(a: int, b: int, p: int) -> int:
+    return (a * b) % p
+
+def mod_pow(a: int, exponent: int, p: int) -> int:
+    return pow(a, exponent, p)
+
+def mod_inverse_bruteforce(a: int, p: int) -> int:
+    for x in range(1, p):
+        if ((a * x) % p) == 1:
+            return x
+
+
+assert mod_add(4, 3, 5) == 2
+assert mod_sub(2, 4, 5) == 3
+assert mod_mul(4, 3, 5) == 2
+assert mod_pow(3, 4, 17) == 13
+assert mod_add(100, 50, 7) == 3
+
+assert mod_inverse_bruteforce(3, 7) == 5
+assert mod_inverse_bruteforce(2, 7) == 4
+assert mod_inverse_bruteforce(6, 7) == 6
+
 # the big prime, p = 2^256 - 2^32 - 977
 p = (1 << 256) - (1 << 32) - 977
 print("p:", p)

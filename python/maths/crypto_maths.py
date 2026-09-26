@@ -209,3 +209,8 @@ def mod_inverse(a: int, m: int) -> int:
     return x % m
 
 print(f"modular inverse: {mod_inverse(b, a)}")
+
+def mod_div(a: int, b: int, p: int) -> int:
+    return (a * mod_inverse(b, p)) % p
+
+assert mod_div(4, 3, 7) == 6

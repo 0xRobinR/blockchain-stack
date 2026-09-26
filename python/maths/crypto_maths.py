@@ -214,3 +214,8 @@ def mod_div(a: int, b: int, p: int) -> int:
     return (a * mod_inverse(b, p)) % p
 
 assert mod_div(4, 3, 7) == 6
+
+def using_fermat_theorem(a: int, p: int) -> int:
+    return pow(a, p - 2, p)
+
+assert mod_inverse(3, 7) == using_fermat_theorem(3, 7)

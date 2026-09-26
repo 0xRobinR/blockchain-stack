@@ -199,3 +199,13 @@ def extended_euclidean_algorithm(a: int, b: int) -> tuple[int, int, int]:
 x, y, gcd = extended_euclidean_algorithm(a, b)
 
 print(f"gcd({a}, {b}) = {gcd}, x = {x}, y = {y}, {a}*{x} + {b}*{y} = {a*x + b*y}")
+
+def mod_inverse(a: int, m: int) -> int:
+    x, y, gcd = extended_euclidean_algorithm(a, m)
+
+    if gcd != 1:
+        raise ValueError("Modular inverse does not exist")
+
+    return x % m
+
+print(f"modular inverse: {mod_inverse(b, a)}")

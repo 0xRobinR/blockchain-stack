@@ -178,3 +178,24 @@ def is_prime_fermat(a, p) -> bool:
     return pow(a, p - 1, p) == 1
 
 print(f"is prime: {is_prime_fermat(2, p)}")
+
+# extended euclidean alogrithm
+
+a = 40
+b = 17
+
+def extended_euclidean_algorithm(a: int, b: int) -> tuple[int, int, int]:
+    
+    if b == 0:
+        return (1, 0, a)
+    
+    x1, y1, gcd = extended_euclidean_algorithm(b, a % b)
+
+    x = y1
+    y = x1 - (a // b) * y1
+
+    return (x, y, gcd)
+
+x, y, gcd = extended_euclidean_algorithm(a, b)
+
+print(f"gcd({a}, {b}) = {gcd}, x = {x}, y = {y}, {a}*{x} + {b}*{y} = {a*x + b*y}")
